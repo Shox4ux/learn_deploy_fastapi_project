@@ -78,15 +78,7 @@ sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
 
 ---
 
-## 4.3 Update Packages Again
-
-```bash
-sudo apt update
-```
-
----
-
-## 4.4 Install Docker Engine + Docker Compose Plugin
+## 4.3 Install Docker Engine + Docker Compose Plugin
 
 ```bash
 sudo apt install -y docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
@@ -142,31 +134,11 @@ docker run hello-world
 
 # 7. Clone Your FastAPI Project from GitHub
 
-Go to the recommended deployment directory:
-
-```bash
-cd /opt
-```
-
 Clone your repository (replace USERNAME and REPO_NAME):
 
 ```bash
-sudo git clone https://github.com/USERNAME/REPO_NAME.git
+git clone https://github.com/USERNAME/REPO_NAME.git
 ```
-
-Give ownership to your current user:
-
-```bash
-sudo chown -R $USER:$USER /opt/REPO_NAME
-```
-
-Enter the project folder:
-
-```bash
-cd /opt/REPO_NAME
-```
-
----
 
 # 8. Run FastAPI Using Docker Compose
 
@@ -187,44 +159,9 @@ View logs:
 ```bash
 docker compose logs -f
 ```
-
 ---
 
-# 9. Firewall Setup (Optional but Recommended)
-
-Install firewall:
-
-```bash
-sudo apt install -y ufw
-```
-
-Allow SSH access (IMPORTANT):
-
-```bash
-sudo ufw allow OpenSSH
-```
-
-Allow FastAPI port (example: 8000):
-
-```bash
-sudo ufw allow 8000
-```
-
-Enable firewall:
-
-```bash
-sudo ufw enable
-```
-
-Check firewall status:
-
-```bash
-sudo ufw status
-```
-
----
-
-# 10. Test FastAPI
+# 9. Test FastAPI
 
 Test API inside the server:
 
@@ -246,4 +183,3 @@ http://SERVER_IP:8000
 
 ---
 
-# 11. Update the Project
