@@ -49,49 +49,48 @@ git --version
 
 # 4. Install Docker (Official Method)
 
-First, remove old Docker versions if they exist:
+## 4.1 Create keyrings folder
 
 ```bash
-sudo apt remove -y docker docker-engine docker.io containerd runc
+sudo mkdir -p /etc/apt/keyrings
 ```
 
----
-
-## 4.1 Add Docker GPG Key
+## 4.2 Add docker gpg key (correct way)
 
 ```bash
-sudo install -m 0755 -d /etc/apt/keyrings
-curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo tee /etc/apt/keyrings/docker.asc > /dev/null
-sudo chmod a+r /etc/apt/keyrings/docker.asc
+curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg
+sudo chmod a+r /etc/apt/keyrings/docker.gpg
 ```
 
----
-
-## 4.2 Add Docker Repository
+## 4.3 Add docker repository for ubuntu 22.04 jammy
 
 ```bash
-echo \
-"deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.asc] https://download.docker.com/linux/ubuntu \
-$(. /etc/os-release && echo "$VERSION_CODENAME") stable" | \
-sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+echo "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/ubuntu jammy stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
 ```
 
----
 
-## 4.3 Install Docker Engine + Docker Compose Plugin
+## 4.4 Update package list
+
+```bash
+sudo apt update
+```
+
+
+## 4.5 install docker
 
 ```bash
 sudo apt install -y docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
 ```
 
-Check Docker installation:
+
+## 4.6 Check Docker installation:
 
 ```bash
 docker --version
 docker compose version
 ```
 
----
+
 
 # 5. Enable Docker Service
 
@@ -108,7 +107,6 @@ Check Docker status:
 sudo systemctl status docker
 ```
 
----
 
 # 6. Run Docker Without sudo (Recommended)
 
